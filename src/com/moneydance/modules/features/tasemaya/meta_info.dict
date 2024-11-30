@@ -1,0 +1,11 @@
+{
+  "vendor" = "arnonm"
+  "module_build" = "1"
+  "minbuild" = "1000"
+  "vendor.url" = "http://your.url.here/"
+  "module_name" = "Tase Extension"
+  "module_desc" = "<html><body><title>My Extension</title><p>An HTML description of your extension goes here.</p></body></html>"
+  "desc" = "A text description of your extension goes here."
+  "id" = "yahooqtext"
+}
+
