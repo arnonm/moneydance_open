@@ -26,6 +26,7 @@ class StockExchange : Comparable<StockExchange?> {
     private set
   var symbolGoogle: String? = null
   var symbolYahoo: String? = null
+  var symbolTASE: String? = null
   var symbolThomsonReuters: String? = null
     private set
   var priceMultiplier: Double = 0.0
@@ -56,6 +57,7 @@ class StockExchange : Comparable<StockExchange?> {
     currencyCode = settings.getStr(CURRCODE_KEY, "USD")
     symbolGoogle = settings.getStr(GOOGLE_KEY, "")
     symbolYahoo = settings.getStr(YAHOO_KEY, "")
+    symbolTASE = settings.getStr(TASE_KEY,"")
     symbolThomsonReuters = settings.getStr(THOMSON_KEY, "")
     try {
       priceMultiplier = settings.getStr(MULTIPLIER_KEY, "1.0")!!.toDouble()
@@ -80,6 +82,7 @@ class StockExchange : Comparable<StockExchange?> {
     settings.put(CURRCODE_KEY, currencyCode)
     settings.put(GOOGLE_KEY, symbolGoogle)
     settings.put(YAHOO_KEY, symbolYahoo)
+    settings.put(TASE_KEY, symbolTASE)
     settings.put(THOMSON_KEY, symbolThomsonReuters)
     settings.put(MULTIPLIER_KEY, priceMultiplier.toString())
     settings.put(CURRNAME_KEY, currencyName)
@@ -123,6 +126,7 @@ class StockExchange : Comparable<StockExchange?> {
     private const val CURRCODE_KEY = "curr_id"
     private const val GOOGLE_KEY = "google_id"
     private const val YAHOO_KEY = "yahoo_id"
+    private const val TASE_KEY = "tase_id"
     private const val THOMSON_KEY = "thomson_id"
     private const val MULTIPLIER_KEY = "price_multiplier"
     private const val CURRNAME_KEY = "curr_name"
@@ -204,6 +208,7 @@ class StockExchange : Comparable<StockExchange?> {
       val key = StringBuilder()
       val codes: MutableList<String> = ArrayList(3)
       codes.add(getIdCode(result.symbolYahoo!!))
+      codes.add(getIdCode(result.symbolTASE!!))
       codes.add(getIdCode(result.symbolGoogle!!))
       codes.add(getIdCode(result.symbolThomsonReuters!!))
       Collections.sort(codes)

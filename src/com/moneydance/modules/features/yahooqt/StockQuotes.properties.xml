@@ -31,12 +31,13 @@
 
     <!-- other strings -->
     <entry key="labelColon">: </entry>
-	<entry key="alphavantage">Alphavantage</entry>
-	<entry key="tdameritrade">TD Ameritrade</entry>
+	  <entry key="alphavantage">Alphavantage</entry>
+	  <entry key="tdameritrade">TD Ameritrade</entry>
     <entry key="iextrading">IEX Trading</entry>
     <entry key="ecb">European Central Bank</entry>
     <entry key="yahooUSA">Yahoo!® Finance</entry>
     <entry key="yahooUK">Yahoo!® Finance - UK</entry>
+    <entry key="tase">Tel Aviv Stock Exchange</entry>
     <entry key="yahooRates">Yahoo!® Currency Exchange Rates</entry>
     <entry key="ft">ft.com</entry>
     <entry key="google">Google™ Finance - History Only</entry>
@@ -117,6 +118,7 @@
     <entry key="exchangeName">Exchange Name</entry>
     <entry key="yahooSuffix">Yahoo!® Suffix</entry>
     <entry key="googlePrefix">Google™ Prefix</entry>
+    <entry key="tasePrefix">TASE Prefix</entry>
     <entry key="currency">Currency</entry>
     <entry key="multiplier">Price Multiplier</entry>
     <entry key="errNameBlank">Please enter a Name that is not blank</entry>

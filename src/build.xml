@@ -21,7 +21,7 @@ note: as 'withKolin' can pull in unwanted kotlin files, we've replaced the stand
   <property name="src" value="."/>
   <property name="python-src" value="../python_scripts"/>
   <property file="${src}/user.properties"/>
-  <property name="kotlindir" value="${user.home}/bin/kotlin"/>
+  <property name="kotlindir" value="/opt/idea-IU-252.27397.103/plugins/Kotlin/kotlinc/"/>
   <typedef resource="org/jetbrains/kotlin/ant/antlib.xml" classpath="${kotlindir}/lib/kotlin-ant.jar"/>
 
   <property name="build" value="./build"/>
@@ -29,7 +29,7 @@ note: as 'withKolin' can pull in unwanted kotlin files, we've replaced the stand
   <property name="extprivkeyfile" value="${src}/priv_key"/>
   <property name="extpubkeyfile" value="${src}/pub_key"/>
   <property name="privkeyid" value="99"/>
-  <property name="keypass" value=""/>
+  <property name="keypass" value="Mashov123"/>
 
   <property name="build.sysclasspath" value="ignore" /> <!-- suppress "includeantruntime not set" messages from ant -->
   <property name="build.compiler"  value="modern"/>
@@ -46,8 +46,8 @@ note: as 'withKolin' can pull in unwanted kotlin files, we've replaced the stand
   <property name="kotlin-lib-api-ver" value ="1.9"/>
 
   <property name="bootclasspath"  value="../lib/jdk_1.8_rt.jar"/> <!-- only used on legacy extns when source/target is 1.8 and bootclasspath="${bootclasspath}" is passed to javac -->
-  <property name="python-executable" value="python2.7"/>          <!-- Need to use correct version if running ANT on Windows and Linux etc -->
-
+  <property name="python-executable" value="/usr/local/bin/python"/>          <!-- Need to use correct version if running ANT on Windows and Linux etc -->
+  <property name="md_ext_lib_dir" value="/home/arnonm/moneydance/lib"/>
   <path id="classpath">
 
     <pathelement location="${md_ext_lib_dir}/moneydance.jar"/>    <!-- Force moneydance.jar first -->
@@ -60,18 +60,21 @@ note: as 'withKolin' can pull in unwanted kotlin files, we've replaced the stand
     <pathelement path="../lib/kotlin-stdlib-1.9.21.jar"/>
     <pathelement path="../lib/extadmin.jar"/>
     <pathelement path="../lib/moneydance-dev.jar"/>
-    <pathelement path="../lib/moneydance-private.jar"/> <!-- If you absolutely MUST use something that isn't in the exposed MD API then put a moneydance.jar file from Moneydance 2015 or higher here.  But, please don't. -->
+<!--    <pathelement path="../lib/moneydance-private.jar"/> &lt;!&ndash; If you absolutely MUST use something that isn't in the exposed MD API then put a moneydance.jar file from Moneydance 2015 or higher here.  But, please don't. &ndash;&gt;-->
 
     <pathelement path="../lib/extadmin.jar"/> <!-- Since extadmin has a StringUtils, it needs to come after moneydance.jar -->
     <pathelement path="../lib/jfreechart-1.5.4.jar"/>
     <pathelement path="../lib/jcommon-1.0.24.jar"/>
     <pathelement path="../lib/gson-2.10.1.jar"/>
-    <pathelement path="../lib/tablelayout-20070421.jar"/> <!-- used by findandreplace extension -->
+<!--    <pathelement path="../lib/tablelayout-20070421.jar"/> &lt;!&ndash; used by findandreplace extension &ndash;&gt;-->
     <pathelement path="../lib/mdpython.jar"/> <!-- Used for Python pre-compile -->
+    <pathelement path="../lib/TableLayout-bin-jdk1.5-2009-08-26.jar"/>
 
     <!-- extadmin.jar last - as it contains things like StringUtils -->
     <pathelement location="${md_ext_lib_dir}/extadmin.jar"/>
     <pathelement path="../lib/extadmin.jar"/>
+    <pathelement path="../lib/httpcore5-5.3.1.jar"/>
+    <pathelement path="../lib/json-20250517.jar"/>
 
   </path>
 
@@ -496,6 +499,7 @@ note: as 'withKolin' can pull in unwanted kotlin files, we've replaced the stand
     <build-mxt feature="yahooqt"
       javac-source="${javac-source}" javac-target="${javac-source}"
       build-extra-classpath="${lib}/jsoup-1.11.3.jar"/>
+
   </target>
 
   <target name="yahoofx" depends="init">
