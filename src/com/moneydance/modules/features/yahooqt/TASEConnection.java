@@ -8,6 +8,7 @@ import java.util.Optional;
 
 //import com.infinitekind.util.DateUtil.incrementDate;
 //import com.infinitekind.util.DateUtil.getStrippedDate;
+import com.infinitekind.util.AppDebug;
 import com.infinitekind.moneydance.model.CurrencyType;
 import com.infinitekind.util.DateUtil;
 import com.infinitekind.util.StringUtils.*;
@@ -41,7 +42,8 @@ class TASEConnection  implements  BaseConnection{
   private List<IndiceListing> mappedEntities  = null;
 
   public TASEConnection(String connectionID, StockQuotesModel model, int _capabilities) {
-    super("tase", model, HISTORY_SUPPORT);
+    // super("tase", model);
+    super();
     // model = new StockQuotesModel();
     this.TASESecurities = new TASESecurity();
     this.TASEFunds = new TASEFund();
@@ -101,12 +103,13 @@ class TASEConnection  implements  BaseConnection{
     downloadInfo.recordError("Implementation error: TASE does not offer exchange rates");
   }
 
-  public Boolean updateSecurities(List<DownloadInfo> securitiesToUpdate){
-    // TODO: if there's any initialisation step, that goes here before updateSecurity()
-    //  is invoked for each individual security
-    //getTaseEntities
-    return super.updateSecurities(securitiesToUpdate);
-  }
+  // @Override
+  // public Boolean updateSecurities(List<DownloadInfo> securitiesToUpdate){
+  //   // TODO: if there's any initialisation step, that goes here before updateSecurity()
+  //   //  is invoked for each individual security
+  //   //getTaseEntities
+  //   return super.updateSecurities((List<? extends DownloadInfo>) securitiesToUpdate);
+  // }
 
   /**
    * Retrieve the current exchange rate for the given currency and base
@@ -203,7 +206,7 @@ class TASEConnection  implements  BaseConnection{
     Boolean isBlank = isEmpty(candidate);
     if (!isBlank) {
       for (int index = candidate.length() - 1; index >= 0; index--) {
-        isBlank = Character.isWhitespace(candidate.charAt[index]);
+        isBlank = Character.isWhitespace(candidate.charAt(index));
         if (!isBlank) {
           break; // non-whitespace character found, don't bother checking the remainder
         }

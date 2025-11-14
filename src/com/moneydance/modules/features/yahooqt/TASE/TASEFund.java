@@ -32,6 +32,9 @@ import com.moneydance.modules.features.yahooqt.TASE.jsondata.FundHistoryEntry;
 import com.moneydance.modules.features.yahooqt.TASE.jsondata.FundListing;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.Language;
 import com.moneydance.modules.features.yahooqt.TASE.utils.WebAccess;
+import com.moneydance.modules.features.yahooqt.TASE.TASESecurity;
+import com.moneydance.modules.features.yahooqt.TASE.LatestSecurityPrice;
+
 
 /**
  * @apiNote - TASE API has a different entry for Securities and Funds First a
@@ -60,7 +63,8 @@ public class TASEFund extends TASEListing
     }
     catch (IOException e)
     {
-      PortfolioLog.error(e);
+      //PortfolioLog.error(e);
+      AppDebug.ALL.log(e);
       return Optional.empty();
     }
 
@@ -86,7 +90,8 @@ public class TASEFund extends TASEListing
     }
     catch (Exception e)
     {
-      PortfolioLog.error(e);
+      // PortfolioLog.error(e);
+      AppDebug.ALL.log(e);
       return Optional.empty();
     }
   }
@@ -183,7 +188,8 @@ public class TASEFund extends TASEListing
     }
     catch (Exception e)
     {
-      PortfolioLog.error(e);
+      // PortfolioLog.error(e);
+      AppDebug.ALL.log(e);
       return Optional.empty();
     }
   }

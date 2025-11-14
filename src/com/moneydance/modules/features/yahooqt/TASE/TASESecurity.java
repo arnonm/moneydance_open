@@ -28,6 +28,9 @@ import com.moneydance.modules.features.yahooqt.TASE.jsondata.SecurityHistory;
 import com.moneydance.modules.features.yahooqt.TASE.jsondata.SecurityHistoryEntry;
 import com.moneydance.modules.features.yahooqt.TASE.jsondata.SecurityListing;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.Language;
+import com.moneydance.modules.features.yahooqt.TASE.TASESecurity;
+import com.moneydance.modules.features.yahooqt.TASE.LatestSecurityPrice;
+
 import com.moneydance.modules.features.yahooqt.TASE.utils.WebAccess;
 
 /**

@@ -15,6 +15,7 @@ import name.abuchen.portfolio.model.LatestSecurityPrice;
 import name.abuchen.portfolio.model.Security;
 import name.abuchen.portfolio.model.SecurityPrice;
 import name.abuchen.portfolio.money.Values;
+import com.infinitekind.util.AppDebug;
 
 /*
  * Abstract Class for both TASEFund and TASESecurity
@@ -103,8 +104,10 @@ public abstract class TASEListing
     if ("N/A".equals(s) || "null".equals(s) || "NaN".equals(s) || ".".equals(s)) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
       return LatestSecurityPrice.NOT_AVAILABLE;
     BigDecimal v = (BigDecimal) FMT_PRICE.get().parse(s);
-    return v.multiply(factor).multiply(Values.Quote.getBigDecimalFactor()).setScale(0, RoundingMode.HALF_UP)
-            .longValue();
+    // return v.multiply(factor).multiply(Values.Quote.getBigDecimalFactor()).setScale(0, RoundingMode.HALF_UP)
+            // .longValue();
+    return v.multiply(factor).setScale(0, RoundingMode.HALF_UP).longValue();
+    
   }
 
   protected static int asNumber(String s) throws ParseException

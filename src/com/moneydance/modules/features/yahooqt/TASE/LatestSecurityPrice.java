@@ -6,6 +6,7 @@ public class LatestSecurityPrice extends SecurityPrice {
   private long high;
   private long low;
   private long volume;
+  public static final long NOT_AVAILABLE = -1L;
 
   public LatestSecurityPrice() {
   }

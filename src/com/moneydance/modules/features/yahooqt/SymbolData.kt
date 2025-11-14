@@ -33,6 +33,6 @@ class SymbolData
   /** The base, unadorned security symbol. Cannot be blank.  */
   val symbol: String,
   /** The Yahoo exchange suffix, including the leading period. Can be blank or `null`.  */
-  val suffix: String,
+  public val suffix: String,
   /** An override currency code. Does not include the dash. Can be blank or `null`.  */
   val currencyCode: String)
