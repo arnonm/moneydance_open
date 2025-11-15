@@ -9,7 +9,7 @@ public class LatestSecurityPrice extends SecurityPrice {
   public static final long NOT_AVAILABLE = -1L;
 
   public LatestSecurityPrice() {
-  }
+}
 
   public LatestSecurityPrice(LocalDate date, long price) {
     super(date, price);

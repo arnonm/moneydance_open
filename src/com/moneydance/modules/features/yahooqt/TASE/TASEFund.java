@@ -34,7 +34,7 @@ import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.Language;
 import com.moneydance.modules.features.yahooqt.TASE.utils.WebAccess;
 import com.moneydance.modules.features.yahooqt.TASE.TASESecurity;
 import com.moneydance.modules.features.yahooqt.TASE.LatestSecurityPrice;
-
+import com.infinitekind.util.AppDebug;
 
 /**
  * @apiNote - TASE API has a different entry for Securities and Funds First a

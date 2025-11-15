@@ -30,7 +30,6 @@ import com.moneydance.modules.features.yahooqt.TASE.jsondata.SecurityListing;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.Language;
 import com.moneydance.modules.features.yahooqt.TASE.TASESecurity;
 import com.moneydance.modules.features.yahooqt.TASE.LatestSecurityPrice;
-
 import com.moneydance.modules.features.yahooqt.TASE.utils.WebAccess;
 
 /**
@@ -346,7 +345,7 @@ public class TASESecurity extends TASEListing
                                                                 .addHeader("referer", "https://www.tase.co.il/") //$NON-NLS-1$ //$NON-NLS-2$
                                                                 .addHeader("Cache-Control", "no-cache") //$NON-NLS-1$ //$NON-NLS-2$
                                                                 .addHeader("Content-Type", "application/json") //$NON-NLS-1$ //$NON-NLS-2$
-                                                                .postReturn(JSONValue.toJSONString(uploadData));
+                                                                .postReturn(toJsonString(uploadData));
 
       Optional<SecurityHistory> historyListing = Optional.of(SecurityHistory.fromJson(response));
       return historyListing;
@@ -358,8 +357,15 @@ public class TASESecurity extends TASEListing
       return Optional.empty();
 
     }
+
+    
   }
 
+  private static <T> String toJsonString(T object) 
+    {
+      Gson GSON = new Gson();
+      return GSON.toJson(object);
+    }
 
   public Optional<SecurityHistory> getPriceHistory(Security security, LocalDate fromDate, LocalDate toDate, int page,
                                                    Language lang) throws Exception
