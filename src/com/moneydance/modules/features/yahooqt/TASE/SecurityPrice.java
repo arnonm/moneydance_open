@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class SecurityPrice implements Comparable<SecurityPrice> {
+public class SecurityPrice  implements Comparable<SecurityPrice> {
 
   public static final class ByDate implements Comparator<SecurityPrice>, Serializable {
     private static final long serialVersionUID = 1L;
@@ -43,6 +43,12 @@ public class SecurityPrice implements Comparable<SecurityPrice> {
     this.value = value;
   }
 
+ @Override
+    public int compareTo(SecurityPrice o)
+    {
+        return this.date.compareTo(o.date);
+    }
+    
   @Override
   public String toString() {
     return String.format("%tF: %,10.2f", date, value);

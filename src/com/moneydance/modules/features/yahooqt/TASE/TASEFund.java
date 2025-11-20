@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.hc.core5.http.NameValuePair;
-import org.apache.hc.core5.http.message.BasicNameValuePair;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 //import com.google.common.annotations.VisibleForTesting;
 import com.google.gson.Gson;
@@ -33,6 +33,7 @@ import com.moneydance.modules.features.yahooqt.TASE.jsondata.FundListing;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.Language;
 import com.moneydance.modules.features.yahooqt.TASE.utils.WebAccess;
 import com.moneydance.modules.features.yahooqt.TASE.TASESecurity;
+import com.moneydance.modules.features.yahooqt.TASE.Security;
 import com.moneydance.modules.features.yahooqt.TASE.LatestSecurityPrice;
 import com.infinitekind.util.AppDebug;
 

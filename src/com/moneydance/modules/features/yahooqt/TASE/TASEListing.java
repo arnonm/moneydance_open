@@ -11,10 +11,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Optional;
 
-import name.abuchen.portfolio.model.LatestSecurityPrice;
-import name.abuchen.portfolio.model.Security;
-import name.abuchen.portfolio.model.SecurityPrice;
-import name.abuchen.portfolio.money.Values;
+import com.moneydance.modules.features.yahooqt.TASE.LatestSecurityPrice;
+import com.moneydance.modules.features.yahooqt.TASE.Security;
+import com.moneydance.modules.features.yahooqt.TASE.SecurityPrice;
+// import name.abuchen.portfolio.money.Values;
 import com.infinitekind.util.AppDebug;
 
 /*

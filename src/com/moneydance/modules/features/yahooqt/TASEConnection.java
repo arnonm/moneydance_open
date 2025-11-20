@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import com.moneydance.modules.features.yahooqt.TASE.TASESecurity;
 import com.moneydance.modules.features.yahooqt.TASE.LatestSecurityPrice;
 import com.moneydance.modules.features.yahooqt.TASE.TASEFund;
+import com.moneydance.modules.features.yahooqt.TASE.Security;
 import com.moneydance.modules.features.yahooqt.TASE.TASEEntities;
 import com.moneydance.modules.features.yahooqt.TASE.jsondata.IndiceListing;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.TaseSecuritySubType;
@@ -28,7 +29,8 @@ import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.TaseSecurit
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.TaseType;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.Language;
 
-class TASEConnection  implements  BaseConnection{
+public final class TASEConnection  extends  BaseConnection
+{
 
   private  static final String TASESecURL = "https://mayaapi.tase.co.il/api/fund/history"; //$NON-NLS-1$
   private  static final String TASEFundURL = "/api/fund/details"; //$NON-NLS-1$
@@ -42,8 +44,8 @@ class TASEConnection  implements  BaseConnection{
   private List<IndiceListing> mappedEntities  = null;
 
   public TASEConnection(String connectionID, StockQuotesModel model, int _capabilities) {
-    // super("tase", model);
-    super();
+    super(connectionID, model, _capabilities);
+    // super();
     // model = new StockQuotesModel();
     this.TASESecurities = new TASESecurity();
     this.TASEFunds = new TASEFund();
@@ -126,7 +128,11 @@ class TASEConnection  implements  BaseConnection{
     }
 
     TaseType type = getSecurityType(downloadInfo.fullTickerSymbol);
-    String security = downloadInfo.fullTickerSymbol;
+    // String security = downloadInfo.fullTickerSymbol;
+    Security security = new Security(downloadInfo.fullTickerSymbol, "EUR");
+    security.setTickerSymbol(downloadInfo.fullTickerSymbol);
+
+
     Optional<LatestSecurityPrice> priceOpt = Optional.empty();
     CurrencyType relativeCurrency = downloadInfo.getSecurity().getBook().getCurrencies().getCurrencyByIDString(CURRENCY_CODE);
     try

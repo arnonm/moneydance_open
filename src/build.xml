@@ -34,6 +34,7 @@ note: as 'withKolin' can pull in unwanted kotlin files, we've replaced the stand
   <property name="build.sysclasspath" value="ignore" /> <!-- suppress "includeantruntime not set" messages from ant -->
   <property name="build.compiler"  value="modern"/>
   <property name="build.compiler.fulldepend"  value="true"/>
+  <property name="build.compiler.emacs" value="true" />
   <property name="dist"  value="../dist"/>
   <property name="install"  value="${user.home}/.moneydance/fmodules"/>
 
