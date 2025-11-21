@@ -496,7 +496,7 @@ note: as 'withKolin' can pull in unwanted kotlin files, we've replaced the stand
   <!-- START OF JAVA EXTENSION TARGET DEFINITIONS -->
   <!-- ****************************************** -->
 
-  <target name="yahooqt" depends="init">
+  <target name="yahooqt" depends="init" description="yahooqt">
     <build-mxt feature="yahooqt"
       javac-source="${javac-source}" javac-target="${javac-source}"
       build-extra-classpath="${lib}/jsoup-1.11.3.jar"/>

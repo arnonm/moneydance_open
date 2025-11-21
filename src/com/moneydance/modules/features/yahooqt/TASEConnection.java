@@ -17,7 +17,9 @@ import com.infinitekind.util.StringUtils.*;
 //import com.infinitekind.util.StringUtils.parseRate;
 //import com.moneydance.modules.features.yahooqt.SQUtil.isBlank;
 import org.jetbrains.annotations.Nullable;
+// import org.python.tests.multihidden.BaseConnection;
 import org.jetbrains.annotations.NotNull;
+import com.moneydance.modules.features.yahooqt.BaseConnection;
 import com.moneydance.modules.features.yahooqt.TASE.TASESecurity;
 import com.moneydance.modules.features.yahooqt.TASE.LatestSecurityPrice;
 import com.moneydance.modules.features.yahooqt.TASE.TASEFund;
@@ -28,6 +30,7 @@ import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.TaseSecurit
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.TaseSecurityType;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.TaseType;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.Language;
+import java.lang.Exception;
 
 public final class TASEConnection  extends  BaseConnection
 {
@@ -36,21 +39,29 @@ public final class TASEConnection  extends  BaseConnection
   private  static final String TASEFundURL = "/api/fund/details"; //$NON-NLS-1$
   private  static final String CURRENCY_CODE = "ILS"; //$NON-NLS-1$
   private  static final String TASE_REFERRER = "https://www.tase.co.il/";
-  private static int HISTORY_SUPPORT =1;
+  private  static final int HISTORY_SUPPORT =1;
+  private  static final String TASE_ID="tase";
 
   private TASESecurity TASESecurities = null;
   private TASEFund TASEFunds = null;
   private Boolean ismapped=false;
   private List<IndiceListing> mappedEntities  = null;
 
-  public TASEConnection(String connectionID, StockQuotesModel model, int _capabilities) {
-    super(connectionID, model, _capabilities);
+  public TASEConnection(String connectionID, StockQuotesModel model) {
+    super(connectionID, model, HISTORY_SUPPORT);
     // super();
     // model = new StockQuotesModel();
     this.TASESecurities = new TASESecurity();
     this.TASEFunds = new TASEFund();
     this.ismapped = false;
 
+  }
+
+  public TASEConnection(StockQuotesModel model) {
+    super (TASE_ID, model, HISTORY_SUPPORT);
+    this.TASESecurities = new TASESecurity();
+    this.TASEFunds = new TASEFund();
+    this.ismapped = false;
   }
 
   @Nullable
@@ -273,4 +284,5 @@ public final class TASEConnection  extends  BaseConnection
       this.ismapped = false;
     }
   }
+  
 }
