@@ -8,17 +8,19 @@ import java.util.Optional;
 
 //import com.infinitekind.util.DateUtil.incrementDate;
 //import com.infinitekind.util.DateUtil.getStrippedDate;
-import com.infinitekind.util.AppDebug;
+
+
 import com.infinitekind.moneydance.model.CurrencyType;
 import com.infinitekind.util.DateUtil;
 import com.infinitekind.util.StringUtils.*;
+import com.infinitekind.util.AppDebug;
 //import com.infinitekind.util.StringUtils.fieldIndex;
 //import com.infinitekind.util.StringUtils.isEmpty;
 //import com.infinitekind.util.StringUtils.parseRate;
 //import com.moneydance.modules.features.yahooqt.SQUtil.isBlank;
-import org.jetbrains.annotations.Nullable;
+//import org.jetbrains.annotations.Nullable;
 // import org.python.tests.multihidden.BaseConnection;
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 import com.moneydance.modules.features.yahooqt.BaseConnection;
 import com.moneydance.modules.features.yahooqt.TASE.TASESecurity;
 import com.moneydance.modules.features.yahooqt.TASE.LatestSecurityPrice;
@@ -30,7 +32,7 @@ import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.TaseSecurit
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.TaseSecurityType;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.TaseType;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.Language;
-import java.lang.Exception;
+// import java.lang.Exception;
 
 public final class TASEConnection  extends  BaseConnection
 {
@@ -64,29 +66,39 @@ public final class TASEConnection  extends  BaseConnection
     this.ismapped = false;
   }
 
-  @Nullable
+  public String toString() {
+    return "Tel Aviv Stock Exchange (TASE)";
+  }
+
+  //@Nullable
   public String getFullTickerSymbol(SymbolData parsedSymbol, StockExchange exchange) {
+    AppDebug.ALL.log("tase: getFullTickerSymbol for symbol: " + parsedSymbol.getSymbol() + " exchange: " + exchange);
+
     if ((parsedSymbol == null) || isBlank(parsedSymbol.getSymbol())){
       return null;
     }
-
+    AppDebug.ALL.log("tase: parsed symbol: " + parsedSymbol.getSymbol() + " suffix: " + parsedSymbol.getSuffix());
     // check if the exchange was already added on, which will override the selected exchange
     if (!isBlank(parsedSymbol.getSuffix())) {
       return parsedSymbol.getSymbol() + parsedSymbol.getSuffix();
     }
     // Check if the selected exchange has a Tase suffix or not. If it does, add it.
     String suffix = exchange.getSymbolTASE();
+    AppDebug.ALL.log("tase: exchange suffix: " + suffix);
     if (suffix == null) {
       return null;
     }
     if (suffix == null || isBlank(suffix)){
       return parsedSymbol.getSymbol();
     }
+    AppDebug.ALL.log("tase: returning full symbol: " + parsedSymbol.getSymbol() + suffix);
     return parsedSymbol.getSymbol() + suffix;
   }
 
-  @Nullable
+  //@Nullable
   public String getCurrencyCodeForQuote(String rawTickerSymbol , StockExchange exchange) {
+    AppDebug.ALL.log("tase: getCurrencyCodeForQuote for symbol: " + rawTickerSymbol + " exchange: " + exchange);
+
     if (isBlank(rawTickerSymbol)){
       return null;
     }
@@ -113,7 +125,9 @@ public final class TASEConnection  extends  BaseConnection
   }
 
   public void updateExchangeRate(DownloadInfo downloadInfo) {
-    downloadInfo.recordError("Implementation error: TASE does not offer exchange rates");
+
+    AppDebug.ALL.log("tase: updateExchangeRate called - TASE does not offer exchange rates");
+    // downloadInfo.recordError("Implementation error: TASE does not offer exchange rates");
   }
 
   // @Override
@@ -129,7 +143,7 @@ public final class TASEConnection  extends  BaseConnection
    * @param downloadInfo   The wrapper for the currency to be downloaded and the download results
    */
   public void  updateSecurity(DownloadInfo downloadInfo) {
-    AppDebug.ALL.log("tase: updating security: " + downloadInfo.fullTickerSymbol);
+    AppDebug.ALL.log("TASE: updating security: " + downloadInfo.fullTickerSymbol);
     if ((downloadInfo.fullTickerSymbol == null) || (downloadInfo.fullTickerSymbol.length() == 0))
       return;
 
