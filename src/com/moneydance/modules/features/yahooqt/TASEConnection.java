@@ -25,6 +25,7 @@ import com.moneydance.modules.features.yahooqt.BaseConnection;
 import com.moneydance.modules.features.yahooqt.TASE.TASESecurity;
 import com.moneydance.modules.features.yahooqt.TASE.LatestSecurityPrice;
 import com.moneydance.modules.features.yahooqt.TASE.TASEFund;
+
 import com.moneydance.modules.features.yahooqt.TASE.Security;
 import com.moneydance.modules.features.yahooqt.TASE.TASEEntities;
 import com.moneydance.modules.features.yahooqt.TASE.jsondata.IndiceListing;
@@ -48,6 +49,7 @@ public final class TASEConnection  extends  BaseConnection
   private TASEFund TASEFunds = null;
   private Boolean ismapped=false;
   private List<IndiceListing> mappedEntities  = null;
+  // private StockQuotesModel model;
 
   public TASEConnection(String connectionID, StockQuotesModel model) {
     super(connectionID, model, HISTORY_SUPPORT);
@@ -85,9 +87,7 @@ public final class TASEConnection  extends  BaseConnection
     // Check if the selected exchange has a Tase suffix or not. If it does, add it.
     String suffix = exchange.getSymbolTASE();
     AppDebug.ALL.log("tase: exchange suffix: " + suffix);
-    if (suffix == null) {
-      return null;
-    }
+    
     if (suffix == null || isBlank(suffix)){
       return parsedSymbol.getSymbol();
     }
@@ -113,13 +113,16 @@ public final class TASEConnection  extends  BaseConnection
         // the currency ID was encoded along with the market ID
         String[] parts = marketID.split("-"); // This creates ["US", "USD"]
         if (parts.length > 1) {
+          AppDebug.ALL.log("tase: returning overridden currency code: " + parts[1]);
           return parts[1];
         }
       }
     }
     if (exchange != null && exchange.getCurrencyCode() != null) {
+        AppDebug.ALL.log("tase: returning exchange currency code: " + exchange.getCurrencyCode());
         return exchange.getCurrencyCode();
     } else {
+      AppDebug.ALL.log("tase: no currency code found for symbol: " + rawTickerSymbol);
       return null;
     }
   }
@@ -143,7 +146,7 @@ public final class TASEConnection  extends  BaseConnection
    * @param downloadInfo   The wrapper for the currency to be downloaded and the download results
    */
   public void  updateSecurity(DownloadInfo downloadInfo) {
-    AppDebug.ALL.log("TASE: updating security: " + downloadInfo.fullTickerSymbol);
+    AppDebug.ALL.log("tase: updating security: " + downloadInfo.fullTickerSymbol);
     if ((downloadInfo.fullTickerSymbol == null) || (downloadInfo.fullTickerSymbol.length() == 0))
       return;
 
@@ -164,16 +167,21 @@ public final class TASEConnection  extends  BaseConnection
     {
       if (type == TaseType.FUND)
       {
+        AppDebug.ALL.log("tase: identified as FUND: " + downloadInfo.fullTickerSymbol);
         priceOpt = this.TASEFunds.getLatestQuote(security);
       }
       if (type == TaseType.SECURITY)
+        AppDebug.ALL.log("tase: identified as SECURITY: " + downloadInfo.fullTickerSymbol);
         priceOpt = this.TASESecurities.getLatestQuote(security);
 
+      AppDebug.ALL.log("tase: got price for security: " + downloadInfo.fullTickerSymbol + " price: " + priceOpt.get().getValue());  
       if (priceOpt.isPresent()) {
+
         LatestSecurityPrice price = priceOpt.get();
         if (relativeCurrency != null) {
           downloadInfo.relativeCurrency = relativeCurrency;
         }
+        AppDebug.ALL.log("tase: setting rate for security: " + downloadInfo.fullTickerSymbol + " price: " + price.getValue());
         downloadInfo.setRate(price.getValue(), System.currentTimeMillis());
 
       }

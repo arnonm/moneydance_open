@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
+import com.infinitekind.util.AppDebug;
 import com.moneydance.modules.features.yahooqt.TASE.jsondata.IndiceListing;
 import com.moneydance.modules.features.yahooqt.TASE.utils.TASEHelper.Language;
 import com.moneydance.modules.features.yahooqt.TASE.utils.WebAccess;
@@ -25,6 +25,7 @@ public class TASEEntities {
   public Optional<List<IndiceListing>> getAllListings(Language lang) throws IOException
   {
     // PortfolioLog.info("Getting all Listings from TLV");
+    AppDebug.ALL.log("TASE: Getting all Listings from TLV");
     return responsetoEntitiesList(rpcAllIndices(lang));
   }
   
@@ -39,6 +40,7 @@ public class TASEEntities {
     
     while (times_tried < RETRY_TIMES) {
       try {
+        AppDebug.ALL.log("TASE: RPC all Indices attempt " + (URL + PATH) + " try " + (times_tried + 1));
         response = new WebAccess (URL, PATH)
         .addUserAgent("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; FSL 7.0.6.01001") //$NON-NLS-1$
           .addParameter("lang", String.valueOf(lang.getValue())) //$NON-NLS-1$
@@ -50,6 +52,7 @@ public class TASEEntities {
         return response;
         
       } catch (ConnectException e) {
+        AppDebug.ALL.log("TASE: Connection exception on attempt " + (e.getMessage()) + ", retrying...");
         times_tried++;
       } catch (IOException e) {
         times_tried++;
